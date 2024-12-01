@@ -7,13 +7,29 @@ import (
 	"encoding/pem"
 )
 
-// RsaKey represents an RSA private and public key pair.
 type RsaKey struct {
 	PrivateKey string
 	PublicKey  string
 }
 
-// GenerateRsaKeyPair generates RSA private and public keys and returns them encapsulated in an RSAKey struct.
+// GenerateRsaKeyPair generates RSA private and public keys and returns them as PEM-encoded strings.
+// It uses a 2048-bit key size which provides a good balance of security and performance.
+//
+// Parameters:
+//   - none
+//
+// Returns:
+//   - RsaKey: Struct containing the generated key pair as PEM-encoded strings
+//   - error: Any error that occurred during key generation or encoding
+//
+// Examples:
+//
+//	keys, err := GenerateRsaKeyPair()
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
+//	fmt.Println(keys.PrivateKey) // prints PEM-encoded private key
+//	fmt.Println(keys.PublicKey)  // prints PEM-encoded public key
 func GenerateRsaKeyPair() (RsaKey, error) {
 	var rsaKey RsaKey
 
