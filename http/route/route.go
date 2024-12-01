@@ -119,3 +119,27 @@ func (route GroupRoute) AddGroupRoute(g *gin.Engine) {
 		}
 	}
 }
+
+// Middlewares collects multiple Gin middleware functions into a slice.
+//
+// Parameters:
+// - middleware: One or more Gin middleware functions of type func(*gin.Context).
+//
+// Examples:
+//
+//	authMiddleware := func(c *gin.Context) {
+//	    // Perform authentication
+//	}
+//
+//	loggingMiddleware := func(c *gin.Context) {
+//	    // Log the request
+//	}
+//
+//	middlewares := Middlewares(authMiddleware, loggingMiddleware)
+//	group := engine.Group("/secured", middlewares...)
+//	group.GET("/data", fetchDataHandler)
+//
+// Return type: []func(*gin.Context)
+func Middlewares(middleware ...func(*gin.Context)) []func(*gin.Context) {
+	return middleware
+}
