@@ -9,23 +9,16 @@ import (
 	"strings"
 )
 
-type MailConfig struct {
-	MailFrom     string `json:"mail_from" yaml:"mail_from"`
-	MailServer   string `json:"mail_server" yaml:"mail_server"`
-	MailPort     int64  `json:"mail_port" yaml:"mail_port"`
-	MailPassword string `json:"mail_password" yaml:"mail_password"`
-}
-
-func (m *MailConfig) InitMail() MailConfig {
+func NewMail(mailConfig MailConfig) IMail {
 	return MailConfig{
-		MailFrom:     m.MailFrom,
-		MailServer:   m.MailServer,
-		MailPort:     m.MailPort,
-		MailPassword: m.MailPassword,
+		MailFrom:     mailConfig.MailFrom,
+		MailServer:   mailConfig.MailServer,
+		MailPort:     mailConfig.MailPort,
+		MailPassword: mailConfig.MailPassword,
 	}
 }
 
-func (m *MailConfig) SendMail(to, subject, templatePath string, data interface{}) error {
+func (m MailConfig) SendMail(to, subject, templatePath string, data interface{}) error {
 	if len(to) == 0 || len(subject) == 0 || len(templatePath) == 0 {
 		return errors.New("to, subject, templatePath can not empty")
 	}
